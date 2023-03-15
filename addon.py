@@ -3,6 +3,7 @@ from flask import Flask, jsonify, abort
 from re import sub
 import requests
 from bs4 import BeautifulSoup
+from deep_translator import GoogleTranslator
 def getEpId(seriesID):
     season=seriesID.split('_')[-2]
     episode=seriesID.split('_')[-1]
@@ -66,6 +67,7 @@ def scrape_movie(id):
             temp+=display_section('alcohol', alcohol)
             temp+=display_section('spoilers', spoilers)
             title=soup.find('meta', {'property': 'og:title'})['content'][:-7]
+            temp = translated = GoogleTranslator(source='auto', target='pt').translate(temp)
             return [str(temp),title]
     except Exception as e:
             return [str(e),""]
