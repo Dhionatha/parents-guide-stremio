@@ -100,7 +100,8 @@ MANIFEST = {
     'types': ['movie', 'series'],
     'resources': [
         {'name': "meta", 'types': ["series","movie"], 'idPrefixes': ["gpg"]},
-        {'name': 'stream', 'types': ['movie', 'series']}
+        {'name': 'stream', 'types': ['movie', 'series'],
+        "idPrefixes": ["tt","gpg"]}
         ]
 }
 
@@ -109,6 +110,7 @@ def respond_with(data):
     resp = jsonify(data)
     resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Access-Control-Allow-Headers'] = '*'
+    resp.headers['Cache-Control']='public, max-age=40000'
     return resp
 
 @app.route('/manifest.json')
