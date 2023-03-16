@@ -70,10 +70,13 @@ def scrape_movie(id):
             if len(temp) < 4500: 
                temp = translated = GoogleTranslator(source='auto', target='pt').translate(temp)
             elif len(temp) > 4500:
-               var1, var2 = temp.split(maxsplit=1)
-               var1 = GoogleTranslator(source='auto', target='pt').translate(va1)
-               var2 = GoogleTranslator(source='auto', target='pt').translate(var2)
-               temp = " ".join([var1, var2])
+               translated_parts = []
+                max_len = 4500 # Maximum length of text allowed by Google Translator API
+                for i in range(0, len(temp), max_len):
+                    part = temp[i:i+max_len]
+                    translated_part = GoogleTranslator(source='auto', target='pt').translate(part)
+                    translated_parts.append(translated_part)
+                temp = ''.join(translated_parts)
 
             return [str(temp),title]
     except Exception as e:
