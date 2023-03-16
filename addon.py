@@ -4,6 +4,7 @@ from re import sub
 import requests
 from bs4 import BeautifulSoup
 from deep_translator import GoogleTranslator
+import dl_translate as dlt
 def getEpId(seriesID):
     season=seriesID.split('_')[-2]
     episode=seriesID.split('_')[-1]
@@ -69,12 +70,9 @@ def scrape_movie(id):
             title=soup.find('meta', {'property': 'og:title'})['content'][:-7]
             if len(temp) < 4500: 
                temp = translated = GoogleTranslator(source='auto', target='pt').translate(temp)
-
-            if len(temp) > 4500:
-               var1, var2 = temp.split(maxsplit=1)
-               var1 = translated = GoogleTranslator(source='auto', target='pt').translate(var1)
-               var2 = translated = GoogleTranslator(source='auto', target='pt').translate(var2)
-               temp = " ".join([var1, var2])
+            elif len(temp) > 4500:
+               mt = dlt.TranslationModel() 
+               temp = mt.translate(temp, source="English", target="pt")
 
             return [str(temp),title]
     except Exception as e:
