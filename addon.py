@@ -60,13 +60,6 @@ def scrape_movie(id):
             frightening=parse_section(soup_frightening)
             alcohol=parse_section(soup_alcohol)
 
-            nudity = GoogleTranslator(source='auto', target='pt').translate(nudity)
-            profanity = GoogleTranslator(source='auto', target='pt').translate(profanity)
-            violence = GoogleTranslator(source='auto', target='pt').translate(violence)
-            spoilers = GoogleTranslator(source='auto', target='pt').translate(spoilers)
-            fightening = GoogleTranslator(source='auto', target='pt').translate(fightening)
-            acohol = GoogleTranslator(source='auto', target='pt').translate(alcohol)
-            
             temp=""
             temp+=display_section('nudity', nudity)
             temp+=display_section('profanity', profanity)
@@ -75,7 +68,7 @@ def scrape_movie(id):
             temp+=display_section('alcohol', alcohol)
             temp+=display_section('spoilers', spoilers)
             title=soup.find('meta', {'property': 'og:title'})['content'][:-7]
-            #temp = translated = GoogleTranslator(source='auto', target='pt').translate(temp)
+            temp = GoogleTranslator(source='auto', target='pt').translate(temp)
 
             return [str(temp),title]
     except Exception as e:
