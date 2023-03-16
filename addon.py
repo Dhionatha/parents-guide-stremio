@@ -67,9 +67,10 @@ def scrape_movie(id):
             temp+=display_section('alcohol', alcohol)
             temp+=display_section('spoilers', spoilers)
             title=soup.find('meta', {'property': 'og:title'})['content'][:-7]
-            if len(temp) < 3000: 
+            if len(temp) < 4500: 
                temp = translated = GoogleTranslator(source='auto', target='pt').translate(temp)
-            elif len(temp) > 4500:
+
+            if len(temp) > 4500:
                var1, var2 = temp.split(maxsplit=1)
                var1 = translated = GoogleTranslator(source='auto', target='pt').translate(var1)
                var2 = translated = GoogleTranslator(source='auto', target='pt').translate(var2)
