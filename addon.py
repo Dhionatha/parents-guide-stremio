@@ -69,14 +69,11 @@ def scrape_movie(id):
             title=soup.find('meta', {'property': 'og:title'})['content'][:-7]
             if len(temp) < 3000: 
                temp = translated = GoogleTranslator(source='auto', target='pt').translate(temp)
-            elif len(temp) > 3000:
-                translated_parts = []
-                max_len = 3000 # Maximum length of text allowed by Google Translator API
-                for i in range(0, len(temp), max_len):
-                    part = temp[i:i+max_len]
-                    translated_part = GoogleTranslator(source='auto', target='pt').translate(part)
-                    translated_parts.append(translated_part)
-                temp = ''.join(translated_parts)
+            elif len(temp) > 4500:
+               var1, var2 = temp.split(maxsplit=1)
+               var1 = translated = GoogleTranslator(source='auto', target='pt').translate(var1)
+               var2 = translated = GoogleTranslator(source='auto', target='pt').translate(var2)
+               temp = " ".join([var1, var2])
 
             return [str(temp),title]
     except Exception as e:
