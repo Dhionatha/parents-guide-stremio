@@ -70,7 +70,7 @@ def scrape_movie(id):
             if len(temp) < 4500: 
                temp = translated = GoogleTranslator(source='auto', target='pt').translate(temp)
             elif len(temp) > 4500:
-               translated_parts = []
+                translated_parts = []
                 max_len = 4500 # Maximum length of text allowed by Google Translator API
                 for i in range(0, len(temp), max_len):
                     part = temp[i:i+max_len]
