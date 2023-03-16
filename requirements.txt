@@ -4,4 +4,4 @@ beautifulsoup4==4.10.0
 html5lib
 gunicorn
 deep-translator==1.10.1
-dl-translate
+dl-translate==0.2.6
