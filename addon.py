@@ -4,7 +4,7 @@ from re import sub
 import requests
 from bs4 import BeautifulSoup
 from deep_translator import GoogleTranslator
-import dl_translate as dlt
+
 def getEpId(seriesID):
     season=seriesID.split('_')[-2]
     episode=seriesID.split('_')[-1]
@@ -59,6 +59,13 @@ def scrape_movie(id):
             spoilers=parse_section(soup_spoilers)
             frightening=parse_section(soup_frightening)
             alcohol=parse_section(soup_alcohol)
+
+            nudity = GoogleTranslator(source='auto', target='pt').translate(nudity)
+            profanity = GoogleTranslator(source='auto', target='pt').translate(profanity)
+            violence = GoogleTranslator(source='auto', target='pt').translate(violence)
+            spoilers = GoogleTranslator(source='auto', target='pt').translate(spoilers)
+            fightening = GoogleTranslator(source='auto', target='pt').translate(fightening)
+            acohol = GoogleTranslator(source='auto', target='pt').translate(alcohol)
             
             temp=""
             temp+=display_section('nudity', nudity)
@@ -68,12 +75,7 @@ def scrape_movie(id):
             temp+=display_section('alcohol', alcohol)
             temp+=display_section('spoilers', spoilers)
             title=soup.find('meta', {'property': 'og:title'})['content'][:-7]
-            if len(temp) < 4500: 
-               temp = translated = GoogleTranslator(source='auto', target='pt').translate(temp)
-
-            if len(temp) > 4500:
-               mt = dlt.TranslationModel() 
-               temp = mt.translate(temp, source="English", target="pt")
+            #temp = translated = GoogleTranslator(source='auto', target='pt').translate(temp)
 
             return [str(temp),title]
     except Exception as e:
