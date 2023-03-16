@@ -67,11 +67,11 @@ def scrape_movie(id):
             temp+=display_section('alcohol', alcohol)
             temp+=display_section('spoilers', spoilers)
             title=soup.find('meta', {'property': 'og:title'})['content'][:-7]
-            if len(temp) < 4500: 
+            if len(temp) < 3000: 
                temp = translated = GoogleTranslator(source='auto', target='pt').translate(temp)
-            elif len(temp) > 4500:
+            elif len(temp) > 3000:
                 translated_parts = []
-                max_len = 4500 # Maximum length of text allowed by Google Translator API
+                max_len = 3000 # Maximum length of text allowed by Google Translator API
                 for i in range(0, len(temp), max_len):
                     part = temp[i:i+max_len]
                     translated_part = GoogleTranslator(source='auto', target='pt').translate(part)
