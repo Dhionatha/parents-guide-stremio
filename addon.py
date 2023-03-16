@@ -70,7 +70,8 @@ def scrape_movie(id):
             title=soup.find('meta', {'property': 'og:title'})['content'][:-7]
             if len(temp) < 4500: 
                temp = translated = GoogleTranslator(source='auto', target='pt').translate(temp)
-            elif len(temp) > 4500:
+
+            if len(temp) > 4500:
                mt = dlt.TranslationModel() 
                temp = mt.translate(temp, source="English", target="pt")
 
