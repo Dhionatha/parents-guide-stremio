@@ -4,6 +4,7 @@ from re import sub
 import requests
 from bs4 import BeautifulSoup
 from deep_translator import GoogleTranslator
+from classind import get_rating
 
 def getEpId(seriesID):
     season=seriesID.split('_')[-2]
@@ -152,6 +153,7 @@ def addon_stream(type, id):
     "streams": [
         {
             "name": "Parents Guide",
+            "title": f"{get_rating(id)}",
             "externalUrl": f"stremio:///detail/{type}/gpg-{id}"
         },
                 ]
@@ -162,3 +164,4 @@ def addon_stream(type, id):
 
 if __name__ == '__main__':
     app.run()
+	
