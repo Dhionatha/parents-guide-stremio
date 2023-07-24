@@ -145,6 +145,9 @@ def addon_meta(type, id):
 @app.route('/stream/<type>/<id>.json')
 def addon_stream(type, id):
     id=id.replace('%3A','_')
+    imd = id
+    imdb_id = imd.split(':')
+    final_id = imdb_id[0]
     if 'gpg' in id:abort(404)
     try:
         if type=='series':id=f"{id}-{getEpId(id)}"
@@ -152,6 +155,7 @@ def addon_stream(type, id):
     "streams": [
         {
             "name": "Parents Guide",
+	    "title": f"{get_rating(final_id)}",
             "externalUrl": f"stremio:///detail/{type}/gpg-{id}"
         },
                 ]
