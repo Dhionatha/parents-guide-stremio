@@ -159,7 +159,7 @@ def addon_stream(type, id):
     "streams": [
         {
             "name": "Parents Guide",
-            "title": f"{get_rating(format_id(id))}",
+            "title": f"{id}",
             "externalUrl": f"stremio:///detail/{type}/gpg-{id}"
         },
                 ]
