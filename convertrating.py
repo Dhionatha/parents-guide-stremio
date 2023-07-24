@@ -35,4 +35,3 @@ def converter_certificacao(certificacao):
         'BR 18': '18 anos'
     }
     return certificacoes.get(certificacao, 'Não Disponível')
-      
