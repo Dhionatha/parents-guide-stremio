@@ -93,7 +93,7 @@ def get_soup(id):
 def format_id(id):
     print(id)
     imd = id
-    imdb_id = imd.split(':')
+    imdb_id = imd.split('_')
     final_id = imdb_id[0]
     return final_id
     
@@ -159,7 +159,7 @@ def addon_stream(type, id):
     "streams": [
         {
             "name": "Parents Guide",
-            "title": f"{id}",
+            "title": f"{get_rating(format_id(id))}",
             "externalUrl": f"stremio:///detail/{type}/gpg-{id}"
         },
                 ]
